@@ -1,0 +1,71 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "8dc52f414b3f579a31e7c902673fefad",
+    "entities": [
+      {
+        "tableName": "surahs",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`s_index` INTEGER NOT NULL, `ayas` INTEGER, `name` TEXT, `tname` TEXT, `ename` TEXT, `type` TEXT, `order_num` INTEGER, `start_pos` INTEGER, `rukus` INTEGER, PRIMARY KEY(`s_index`))",
+        "fields": [
+          {
+            "fieldPath": "index",
+            "columnName": "s_index",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ayas",
+            "columnName": "ayas",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "tname",
+            "columnName": "tname",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "ename",
+            "columnName": "ename",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "order",
+            "columnName": "order_num",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "start",
+            "columnName": "start_pos",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "rukus",
+            "columnName": "rukus",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "s_index"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8dc52f414b3f579a31e7c902673fefad')"
+    ]
+  }
+}
