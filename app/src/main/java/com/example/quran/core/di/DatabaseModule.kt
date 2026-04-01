@@ -3,7 +3,7 @@ package com.example.quran.core.di
 import android.content.Context
 import androidx.room.Room
 import com.example.quran.core.data.local.QuranDatabase
-import com.example.quran.core.data.local.SurahDao
+import com.example.quran.core.data.local.QuranDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,5 +30,5 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideSurahDao(db: QuranDatabase): SurahDao = db.surahDao()
+    fun provideSurahDao(db: QuranDatabase): QuranDao = db.quranDao()
 }

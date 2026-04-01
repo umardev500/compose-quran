@@ -1,7 +1,5 @@
 package com.example.quran.feature.surah_list.presentation.components
 
-import android.widget.Space
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -20,20 +17,27 @@ import androidx.compose.ui.unit.sp
 import com.example.quran.core.ui.theme.Hafs
 import com.example.quran.core.ui.theme.RC
 import com.example.quran.core.ui.theme.RSC
-import com.example.quran.feature.surah_list.domain.model.Surah
+import com.example.quran.core.util.clickableWithSound
+import com.example.quran.domain.model.Surah
 
 @Composable
 fun SurahItem(
     surah: Surah,
+    onClick: (surah: Surah) -> Unit = {},
     showDivider: Boolean = true
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .clickableWithSound {
+                onClick(surah)
+            }
+    ) {
         Row(
             modifier = Modifier
                 .padding(horizontal = 12.dp, vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row (
+            Row(
                 modifier = Modifier
                     .weight(1f),
                 verticalAlignment = Alignment.CenterVertically

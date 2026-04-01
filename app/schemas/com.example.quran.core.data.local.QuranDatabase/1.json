@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8dc52f414b3f579a31e7c902673fefad",
+    "identityHash": "d31900a204315e3bb5f8d0fa780380d7",
     "entities": [
       {
         "tableName": "surahs",
@@ -61,11 +61,73 @@
             "s_index"
           ]
         }
+      },
+      {
+        "tableName": "quran",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sura` INTEGER NOT NULL, `aya` INTEGER NOT NULL, `text` TEXT NOT NULL, PRIMARY KEY(`sura`, `aya`))",
+        "fields": [
+          {
+            "fieldPath": "sura",
+            "columnName": "sura",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "aya",
+            "columnName": "aya",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sura",
+            "aya"
+          ]
+        }
+      },
+      {
+        "tableName": "translation",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`sura` INTEGER NOT NULL, `aya` INTEGER NOT NULL, `text` TEXT NOT NULL, PRIMARY KEY(`sura`, `aya`))",
+        "fields": [
+          {
+            "fieldPath": "sura",
+            "columnName": "sura",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "aya",
+            "columnName": "aya",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "sura",
+            "aya"
+          ]
+        }
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8dc52f414b3f579a31e7c902673fefad')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd31900a204315e3bb5f8d0fa780380d7')"
     ]
   }
 }

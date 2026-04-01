@@ -19,7 +19,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.quran.R
+import com.example.quran.Routes
+import com.example.quran.domain.model.Surah
 import com.example.quran.feature.surah_list.presentation.components.SurahItem
 
 class SurahListScreen : Screen {
@@ -28,6 +32,11 @@ class SurahListScreen : Screen {
     override fun Content() {
         val screenModel = getScreenModel<SurahListViewModel>()
         val surahs by screenModel.surahs.collectAsState()
+        val navigator = LocalNavigator.currentOrThrow
+
+        val onSurahClick: (Surah) -> Unit = { surah ->
+            navigator.push(Routes.surahDetail(surah.index))
+        }
 
         Scaffold(
             topBar = {
@@ -36,7 +45,7 @@ class SurahListScreen : Screen {
                         Text("Quran")
                     },
                     actions = {
-                        IconButton(onClick = {}) {
+                        IconButton(onClick = { }) {
                             Icon(
                                 painter = painterResource(R.drawable.round_search_24),
                                 contentDescription = "search icon",
@@ -63,7 +72,7 @@ class SurahListScreen : Screen {
                     .padding(paddingValues)
             ) {
                 items(surahs, key = { it.index }) {
-                    SurahItem(surah = it)
+                    SurahItem(surah = it, onClick = onSurahClick)
                 }
             }
         }
