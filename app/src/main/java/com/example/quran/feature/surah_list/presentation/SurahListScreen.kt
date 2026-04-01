@@ -35,7 +35,7 @@ class SurahListScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
 
         val onSurahClick: (Surah) -> Unit = { surah ->
-            navigator.push(Routes.surahDetail(surah.index))
+            navigator.push(Routes.surahDetail(surah.index, surah.tname ?: ""))
         }
 
         Scaffold(

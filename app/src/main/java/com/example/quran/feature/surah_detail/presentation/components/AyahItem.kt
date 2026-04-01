@@ -13,19 +13,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.quran.core.ui.theme.Hafs
-import com.example.quran.core.ui.theme.RC
 import com.example.quran.core.ui.theme.RR
 import com.example.quran.core.util.NumberMapper
+import com.example.quran.core.util.clickableWithSound
 import com.example.quran.domain.model.AyahWithTranslation
 
 @Composable
 fun AyahItem(
     ayah: AyahWithTranslation,
-    showDivider: Boolean = true
+    showDivider: Boolean = true,
+    onClick: (AyahWithTranslation) -> Unit = {}
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .clickableWithSound {
+                onClick(ayah)
+            }
     ) {
         Row(
             modifier = Modifier

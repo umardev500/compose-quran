@@ -8,5 +8,5 @@ import com.example.quran.feature.surah_list.presentation.SurahListScreen
 object Routes {
     fun surahList(): Screen = SurahListScreen()
     fun search(): Screen = SearchScreen()
-    fun surahDetail(surahId: Int): Screen = SurahDetailScreen(surahId)
+    fun surahDetail(surahId: Int, surahName: String): Screen = SurahDetailScreen(surahId, surahName)
 }

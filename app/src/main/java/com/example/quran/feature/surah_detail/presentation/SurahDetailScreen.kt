@@ -13,6 +13,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import cafe.adriel.voyager.core.screen.Screen
@@ -21,9 +24,14 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.quran.R
 import com.example.quran.core.util.clickWithSound
+import com.example.quran.domain.model.AyahWithTranslation
 import com.example.quran.feature.surah_detail.presentation.components.AyahItem
+import com.example.quran.feature.surah_list.presentation.components.SurahItemSheet
 
-data class SurahDetailScreen(val surahId: Int) : Screen {
+data class SurahDetailScreen(
+    val surahId: Int,
+    val surahName: String,
+) : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
@@ -33,6 +41,14 @@ data class SurahDetailScreen(val surahId: Int) : Screen {
             }
         val ayahs by screenModel.ayahs.collectAsState()
         val navigator = LocalNavigator.currentOrThrow
+
+        var showSheet by remember { mutableStateOf(false) }
+        var selectedAyah by remember { mutableStateOf<AyahWithTranslation?>(null) }
+
+        val onItemClick: (AyahWithTranslation) -> Unit = { ayah ->
+            selectedAyah = ayah
+            showSheet = true
+        }
 
         Scaffold(
             topBar = {
@@ -46,7 +62,7 @@ data class SurahDetailScreen(val surahId: Int) : Screen {
                         }
                     },
                     title = {
-                        Text(text = "Read Qur'an")
+                        Text(text = surahName)
                     },
                     actions = {
                         IconButton(onClick = {}) {
@@ -65,9 +81,16 @@ data class SurahDetailScreen(val surahId: Int) : Screen {
                     .padding(paddingValues)
             ) {
                 items(ayahs, key = { it.aya }) {
-                    AyahItem(it)
+                    AyahItem(it, onClick = onItemClick)
                 }
             }
+        }
+
+        if (showSheet) {
+            SurahItemSheet(
+                surah = surahName,
+                ayah = selectedAyah,
+                onDismissRequest = { showSheet = false })
         }
     }
 }
