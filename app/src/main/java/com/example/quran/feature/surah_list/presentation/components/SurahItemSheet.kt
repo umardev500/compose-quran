@@ -37,6 +37,7 @@ fun SurahItemSheet(
 ) {
     val clipboard = LocalClipboard.current
     val scope = rememberCoroutineScope()
+    val ayahInfo = "QS. $surah: Ayat ${ayah?.aya}"
 
     ModalBottomSheet(onDismissRequest = onDismissRequest) {
         Column(
@@ -50,7 +51,7 @@ fun SurahItemSheet(
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "QS. $surah: Ayat ${ayah?.aya}",
+                    text = ayahInfo,
                     fontFamily = RR,
                     fontSize = 18.sp
                 )
@@ -68,6 +69,7 @@ fun SurahItemSheet(
                             append(ayah?.arabicText ?: "")
                             append("\n")
                             append(ayah?.translationText ?: "")
+                            append(ayahInfo)
                         }
 
                         clipboard.setClipEntry(
