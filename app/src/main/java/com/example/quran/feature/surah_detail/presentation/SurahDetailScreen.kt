@@ -1,9 +1,11 @@
 package com.example.quran.feature.surah_detail.presentation
 
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,11 +20,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.quran.R
+import com.example.quran.core.ui.theme.Bismillah
 import com.example.quran.core.util.clickWithSound
 import com.example.quran.domain.model.AyahWithTranslation
 import com.example.quran.feature.surah_detail.presentation.components.AyahItem
@@ -75,13 +81,29 @@ data class SurahDetailScreen(
                 )
             }
         ) { paddingValues ->
+            // Bismillah
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
             ) {
-                items(ayahs, key = { it.aya }) {
-                    AyahItem(it, onClick = onItemClick)
+                item {
+                    Spacer(Modifier.padding(top = 16.dp))
+                    Text(
+                        text = "5",
+                        fontFamily = Bismillah,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    )
+                }
+                itemsIndexed(ayahs, key = { _, item -> item.aya }) { index, item ->
+                    val isOdd = item.aya % 2 != 0
+
+                    AyahItem(item, isOdd = isOdd, onClick = onItemClick)
                 }
             }
         }
