@@ -89,6 +89,7 @@ data class SurahDetailScreen(
                     .padding(paddingValues)
             ) {
                 item {
+                    if (surahId == 1) return@item
                     Spacer(Modifier.padding(top = 16.dp))
                     Text(
                         text = "5",
